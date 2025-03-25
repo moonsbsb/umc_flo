@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/ic_bottom_home_select"
+        android:title="홈" />
+    <item
+        android:id="@+id/lookItem"
+        android:icon="@drawable/ic_bottom_look_select"
+        android:title="둘러보기" />
+    <item
+        android:id="@+id/searchItem"
+        android:icon="@drawable/ic_bottom_search_select"
+        android:title="검색" />
+    <item
+        android:id="@+id/storageItem"
+        android:icon="@drawable/ic_bottom_locker_select"
+        android:title="보관함" />
+</menu>
