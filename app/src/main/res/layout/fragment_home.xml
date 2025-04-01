@@ -386,7 +386,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/albumTxt" />
 
-            <ImageView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/panelVP"
                 android:layout_width="440dp"
                 android:layout_height="420dp"
@@ -401,12 +401,14 @@
             <me.relex.circleindicator.CircleIndicator3
                 android:id="@+id/indicator"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
+                app:ci_drawable="@drawable/blue_radius"
+                app:ci_drawable_unselected="@drawable/gray_radius"
+                app:ci_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/panelVP"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/panelVP" />
 
             <TextView
                 android:id="@+id/panelTxt"

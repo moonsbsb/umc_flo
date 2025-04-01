@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_flo.databinding.FragmentHomeBinding
 import com.example.umc_flo.ui.BannerVPAdapter
+import com.example.umc_flo.ui.PanelVPAdapter
 
 class HomeFragment: Fragment() {
 
@@ -31,6 +32,13 @@ class HomeFragment: Fragment() {
         }
         // 배너 뷰페이저
         homeBinding.bannerVP.adapter = BannerVPAdapter(this)
+
+        // 판넬 뷰페이저
+        val adapter = PanelVPAdapter()
+        homeBinding.panelVP.adapter = adapter
+        homeBinding.indicator.setViewPager(homeBinding.panelVP)
+
+
     }
     private fun replaceFragment(fragment: Fragment){
         parentFragmentManager.beginTransaction()

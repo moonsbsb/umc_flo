@@ -80,6 +80,5 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
 
     // circleIndicator
-    implementation("com.google.android.material:material:1.7.0")
     implementation("me.relex:circleindicator:2.1.6")
 }

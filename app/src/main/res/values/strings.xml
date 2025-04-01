@@ -4,4 +4,6 @@
     <string name="today_music_txt">오늘 발매 음악</string>
     <string name="podcast_txt">매일 들어도 좋은 팟캐스트</string>
     <string name="video_txt">비디오 콜렉션</string>
+    <string name="indicator_selected">blue_radius</string>
+    <string name="indicator_unselected">gray_radius</string>
 </resources>
