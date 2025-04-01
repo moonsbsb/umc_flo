@@ -7,15 +7,77 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/frame_main"
+        android:id="@+id/miniPlayerFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
+        <LinearLayout
+            android:id="@+id/miniPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mini_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="라일락" />
+
+                <TextView
+                    android:id="@+id/mini_singer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아이유"
+                    android:textColor="#d7d7d7"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="3dp"
+                app:srcCompat="@drawable/btn_miniplayer_previous" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="3dp"
+                app:srcCompat="@drawable/btn_miniplay_pause" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/btn_miniplayer_next" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="3dp"
+                app:srcCompat="@drawable/btn_miniplayer_go_list" />
+
+        </LinearLayout>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,6 +87,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_item"/>
+        app:menu="@menu/bottom_item" />
+
+    <FrameLayout
+        android:id="@+id/frameMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/miniPlayerFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
