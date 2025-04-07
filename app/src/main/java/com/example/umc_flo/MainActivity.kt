@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.umc_flo.data.Song
 import com.example.umc_flo.databinding.ActivityMainBinding
 
 class MainActivity: AppCompatActivity() {
@@ -29,10 +30,16 @@ class MainActivity: AppCompatActivity() {
 
         replaceFragment(HomeFragment())
 
+
+        val song = Song(binding.miniTitle.text.toString(), binding.miniSinger.text.toString(), 0, 60, false)
+
         binding.miniPlayerFrame.setOnClickListener {
             val intent = Intent(this, SongActivity::class.java).apply{
-                putExtra("title", binding.miniTitle.text.toString())
-                putExtra("singer", binding.miniSinger.text.toString())
+                putExtra("title", song.title)
+                putExtra("singer", song.singer)
+                putExtra("second", song.second)
+                putExtra("playTime", song.playtime)
+                putExtra("isPlaying", song.isPlaying)
             }
             songActivityResult.launch(intent)
         }
