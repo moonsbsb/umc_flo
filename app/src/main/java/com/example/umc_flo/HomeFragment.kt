@@ -1,6 +1,8 @@
 package com.example.umc_flo
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,22 @@ class HomeFragment: Fragment() {
         return homeBinding.root
     }
 
+    private var currentPage = 0
+    private val slideHandler = Handler(Looper.getMainLooper())
+
+    private val slideRunnable = object : Runnable {
+        override fun run() {
+            val adapter = homeBinding.panelVP.adapter
+            val itemCount = adapter?.itemCount ?: 0
+
+            if (itemCount > 0) {
+                currentPage = (currentPage + 1) % itemCount
+                homeBinding.panelVP.setCurrentItem(currentPage, true)
+                slideHandler.postDelayed(this, 3000)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,6 +56,8 @@ class HomeFragment: Fragment() {
         homeBinding.panelVP.adapter = adapter
         homeBinding.indicator.setViewPager(homeBinding.panelVP)
 
+        // 자동 슬라이드
+        slideHandler.postDelayed(slideRunnable, 3000)
 
     }
     private fun replaceFragment(fragment: Fragment){
