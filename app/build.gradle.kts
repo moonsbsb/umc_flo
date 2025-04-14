@@ -81,4 +81,7 @@ dependencies {
 
     // circleIndicator
     implementation("me.relex:circleindicator:2.1.6")
+
+    //GSon추가
+    implementation("com.google.code.gson:gson:2.8.9")
 }

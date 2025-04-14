@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.databinding.ActivityMainBinding
+import com.google.gson.Gson
 
 class MainActivity: AppCompatActivity() {
 
     val binding by lazy{
         ActivityMainBinding.inflate(layoutInflater)
     }
+    private var song: Song = Song()
+    private var gson: Gson = Gson()
 
     private val songActivityResult =  registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){ result ->
@@ -30,9 +33,7 @@ class MainActivity: AppCompatActivity() {
 
         replaceFragment(HomeFragment())
 
-
-        val song = Song(binding.miniTitle.text.toString(), binding.miniSinger.text.toString(), 0, 60, false)
-
+        //val song = Song(binding.miniTitle.text.toString(), binding.miniSinger.text.toString(), 0, 60, false, "music_lilac")
         binding.miniPlayerFrame.setOnClickListener {
             val intent = Intent(this, SongActivity::class.java).apply{
                 putExtra("title", song.title)
@@ -40,6 +41,7 @@ class MainActivity: AppCompatActivity() {
                 putExtra("second", song.second)
                 putExtra("playTime", song.playtime)
                 putExtra("isPlaying", song.isPlaying)
+                putExtra("music", song.music)
             }
             songActivityResult.launch(intent)
         }
@@ -56,10 +58,29 @@ class MainActivity: AppCompatActivity() {
                 else -> false
             }
         }
+    }
 
+    private fun setMiniPlayer(song: Song){
+        binding.miniTitle.text = song.title
+        binding.miniSinger.text = song.singer
+        binding.mainSeekbar.progress = (song.second*100)/song.playtime
+    }
 
+    override fun onStart() {
+        super.onStart()
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val songJson = sharedPreferences.getString("songData", null)
+
+        song = if(songJson == null){
+            Song("라일락", "아이유(IU)", 0, 60, false, "music_lilac")
+        }else{
+            gson.fromJson(songJson, Song::class.java)
+        }
+
+        setMiniPlayer(song)
 
     }
+
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameMain, fragment)
