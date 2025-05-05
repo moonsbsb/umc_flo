@@ -6,20 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.umc_flo.data.Album
 import com.example.umc_flo.databinding.FragmentAlbumBinding
 import com.example.umc_flo.ui.AlbumVPAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 
 class AlbumFragment: Fragment() {
 
     val albumBinding by lazy{
         FragmentAlbumBinding.inflate(layoutInflater)
     }
+    private var gson: Gson = Gson()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val albumJson = arguments?.getString("album")
+        val album = gson.fromJson(albumJson, Album::class.java)
+        setInit(album)
+
         return albumBinding.root
     }
 
@@ -44,6 +53,13 @@ class AlbumFragment: Fragment() {
             replaceFragment(HomeFragment())
         }
     }
+
+    private fun setInit(album: Album){
+        albumBinding.albumCover.setImageResource(album.coverImg!!)
+        albumBinding.songAlbumTitle.text = album.title.toString()
+        albumBinding.songSinger.text = album.singer.toString()
+    }
+
     private fun replaceFragment(fragment: Fragment){
         parentFragmentManager.beginTransaction()
             .replace(R.id.frameMain, fragment)

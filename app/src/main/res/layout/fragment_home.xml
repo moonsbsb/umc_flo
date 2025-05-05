@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/panelVP" />
 
             <TextView
-                android:id="@+id/pocastTitle"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -69,7 +69,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                app:layout_constraintTop_toBottomOf="@+id/coverImg" />
 
             <TextView
                 android:id="@+id/singer"
@@ -81,11 +81,11 @@
                 android:textColor="#d7d7d7"
                 android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pocastTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/coverImg"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="15dp"
@@ -124,7 +124,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                app:layout_constraintTop_toBottomOf="@+id/coverImg" />
 
             <TextView
                 android:id="@+id/title2"
@@ -136,7 +136,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                app:layout_constraintTop_toBottomOf="@+id/coverImg" />
 
             <TextView
                 android:id="@+id/singer1"
@@ -148,7 +148,7 @@
                 android:textColor="#d7d7d7"
                 android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pocastTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
             <TextView
@@ -161,16 +161,16 @@
                 android:textColor="#d7d7d7"
                 android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pocastTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/bannerVP"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/albumRV" />
 
             <TextView
                 android:id="@+id/podcastTxt"
@@ -194,7 +194,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pocastTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <ImageView
                 android:id="@+id/discoveryBanner"
@@ -292,99 +292,6 @@
                 android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/videoTitle" />
-
-            <ImageView
-                android:id="@+id/albumImg"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/todayMusic"
-                app:srcCompat="@drawable/album" />
-
-            <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="172dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/todayMusic"
-                app:srcCompat="@drawable/album" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="332dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/todayMusic"
-                app:srcCompat="@drawable/album" />
-
-            <TextView
-                android:id="@+id/albumTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="172dp"
-                android:layout_marginTop="4dp"
-                android:text="LILAC"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumImg" />
-
-            <TextView
-                android:id="@+id/albumTxt2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="332dp"
-                android:layout_marginTop="4dp"
-                android:text="LILAC"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumImg" />
-
-            <TextView
-                android:id="@+id/homeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:text="LILAC"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumImg" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="172dp"
-                android:layout_marginTop="4dp"
-                android:text="아이유(IU)"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumTxt" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="332dp"
-                android:layout_marginTop="4dp"
-                android:text="아이유(IU)"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumTxt" />
-
-            <TextView
-                android:id="@+id/homeSinger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:text="아이유(IU)"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumTxt" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/panelVP"
@@ -504,6 +411,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/panelVP"
                 app:srcCompat="@drawable/btn_main_ticket" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumRV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/todayMusic"
+                tools:listitem="@layout/item_album" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

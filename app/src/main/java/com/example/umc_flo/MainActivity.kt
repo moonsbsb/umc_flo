@@ -60,7 +60,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-    private fun setMiniPlayer(song: Song){
+    fun setMiniPlayer(song: Song){
         binding.miniTitle.text = song.title
         binding.miniSinger.text = song.singer
         binding.mainSeekbar.progress = (song.second*100)/song.playtime
