@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.kapt")
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +43,9 @@ android {
     viewBinding{
         enable = true
     }
+    dataBinding{
+        enable = true
+    }
 
 }
 
@@ -57,6 +63,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.room.common)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,7 +75,7 @@ dependencies {
     // ROOM
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
@@ -84,4 +91,10 @@ dependencies {
 
     //GSon추가
     implementation("com.google.code.gson:gson:2.8.9")
+
+    implementation("com.google.android.material:material:1.10.0")
+
+
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }

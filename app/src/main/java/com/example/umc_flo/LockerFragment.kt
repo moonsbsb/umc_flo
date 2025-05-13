@@ -1,6 +1,7 @@
 package com.example.umc_flo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,8 @@ import com.example.umc_flo.ui.LockerRVAdapter
 
 class LockerFragment: Fragment() {
 
-    val lockerBinding by lazy {
-        FragmentLockerBinding.inflate(layoutInflater)
-    }
+    private var _binding: FragmentLockerBinding? = null
+    private val lockerBinding get() = _binding!!
     val datas = ArrayList<Album>()
 
     override fun onCreateView(
@@ -22,17 +22,9 @@ class LockerFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        datas.apply {
-            add(Album("Butter", "방탄소년 (BTS)", R.drawable.img_album_exp))
-            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album("Next Level", "에스파 (AESPA)", R.drawable.img_album_exp3))
-            add(Album("Boy With Love", "방탄소년단 (BTS)", R.drawable.img_album_exp4))
-            add(Album("BBoom BBoom", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5))
-            add(Album("Weekend", "태연 (TAEYEON)", R.drawable.img_album_exp6))
-            add(Album("How Sweet", "뉴진스 (NEWJEANS)", R.drawable.img_album_exp7))
-            add(Album("Like Jennie", "제니 (JENNIE)", R.drawable.img_album_exp8))
+        _binding = FragmentLockerBinding.inflate(inflater, container, false)
 
-        }
+        Log.d("TEST", "binding 초기화 완료")
 
         val adapter = LockerRVAdapter(datas)
         lockerBinding.lockerRV.adapter = adapter
@@ -48,6 +40,7 @@ class LockerFragment: Fragment() {
             }
 
         })
+
 
         return lockerBinding.root
     }

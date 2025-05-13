@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_flo.data.Album
+import com.example.umc_flo.data.AlbumDatabase
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.databinding.FragmentHomeBinding
 import com.example.umc_flo.ui.AlbumRVAdapter
@@ -30,19 +31,8 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // 데이터 리스트 생성 더미 리스트
-        albumDatas.apply{
-            add(Album("Butter", "방탄소년 (BTS)", R.drawable.img_album_exp,
-                arrayListOf(
-                    Song("Butter", "방탄소년 (BTS)", 0, 160,false, "music_butter.mp3")
-                )))
-            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album("Next Level", "에스파 (AESPA)", R.drawable.img_album_exp3))
-            add(Album("Boy With Love", "방탄소년단 (BTS)", R.drawable.img_album_exp4))
-            add(Album("BBoom BBoom", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5))
-            add(Album("Weekend", "태연 (TAEYEON)", R.drawable.img_album_exp6))
-
-        }
+        val albumDB = AlbumDatabase.getInstance(requireContext())
+        albumDatas = ArrayList(albumDB.albumDao().getAlbum())
 
         val albumAdapter = AlbumRVAdapter(albumDatas)
         homeBinding.albumRV.adapter = albumAdapter

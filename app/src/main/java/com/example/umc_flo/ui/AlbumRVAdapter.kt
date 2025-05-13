@@ -37,9 +37,20 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>): RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(albumList[position])
-        //holder.itemView.setOnClickListener { mItemClikListner.onItemClick(albumList[position]) }
+        holder.itemView.setOnClickListener { mItemClikListner.onItemClick(albumList[position]) }
 
         holder.binding.title.setOnClickListener { mItemClikListner.onRemoveAlbum(position) }
+
+        holder.binding.albumPlay.setOnClickListener {
+            val album = albumList[position]
+
+            val song = Song(
+                title = album.title!!,
+                singer = album.singer!!,
+                playtime = 1
+            )
+            mItemClikListner.OnPlayMiniPlayer(song)
+        }
     }
 
     override fun getItemCount(): Int = albumList.size
@@ -50,15 +61,6 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>): RecyclerView.Adap
             binding.title.text = album.title
             binding.singer.text = album.singer
             binding.coverImg.setImageResource(album.coverImg!!)
-
-            binding.albumPlay.setOnClickListener {
-                if (album.title == "Butter") {
-                    val song = album.songs?.getOrNull(0)
-                    if (song != null) {
-                        mItemClikListner.OnPlayMiniPlayer(song)
-                    }
-                }
-            }
 
         }
     }
