@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "306690655275",
+    "project_id": "umcflo",
+    "storage_bucket": "umcflo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306690655275:android:5c3a1a6baa6acfc2dfd66e",
+        "android_client_info": {
+          "package_name": "com.example.umc_flo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP2XkKKqJ7ODxy4VP3sllTHv-srm3eVjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
