@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_flo.data.Album
-import com.example.umc_flo.data.AlbumDatabase
 import com.example.umc_flo.data.Song
+import com.example.umc_flo.data.SongDatabase
 import com.example.umc_flo.databinding.FragmentHomeBinding
 import com.example.umc_flo.ui.AlbumRVAdapter
 import com.example.umc_flo.ui.BannerVPAdapter
@@ -25,14 +25,19 @@ class HomeFragment: Fragment() {
     }
     private var albumDatas = ArrayList<Album>()
 
+    private lateinit var songDB : SongDatabase
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val albumDB = AlbumDatabase.getInstance(requireContext())
-        albumDatas = ArrayList(albumDB.albumDao().getAlbum())
+        val albumDB = SongDatabase.getInstance(requireContext())
+        albumDatas = ArrayList(albumDB!!.albumDao().getAlbum())
+
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albumDatas.addAll(songDB.albumDao().getAlbum())
 
         val albumAdapter = AlbumRVAdapter(albumDatas)
         homeBinding.albumRV.adapter = albumAdapter

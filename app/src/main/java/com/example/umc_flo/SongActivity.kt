@@ -7,8 +7,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.umc_flo.data.Like
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.data.SongDatabase
+import com.example.umc_flo.data.User
+import com.example.umc_flo.data.UserDao
 import com.example.umc_flo.databinding.ActivitySongBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -29,20 +32,21 @@ class SongActivity : AppCompatActivity() {
     private var gson: Gson = Gson()
 
     val songs = arrayListOf<Song>()
-    // lateinit var songDB: SongDatabase
+    lateinit var songDB: SongDatabase
     var nowPos = 0
 
-    private lateinit var fireDB: DatabaseReference
+    //private lateinit var fireDB: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(songBinding.root)
 
-        fireDB = FirebaseDatabase.getInstance().reference
+        //fireDB = FirebaseDatabase.getInstance().reference
 
-        //val myRef = fireDB.getReference("message")
-
+        //[[=val myRef = fireDB.getReference("message")
         //myRef.setValue("Hello, World!")
+
+        songDB = SongDatabase.getInstance(this)!!
 
         initPlayList()
         initSong()
@@ -165,23 +169,28 @@ class SongActivity : AppCompatActivity() {
     }
 
     private fun initPlayList() {
-        // songDB = SongDatabase.getInstance(this)!!
-        // songs.addAll(songDB.songDao().getSongs())
+         songDB = SongDatabase.getInstance(this)!!
+         songs.addAll(songDB.songDao().getSongs())
 
-        songs.add(Song("Lilac", "아이유 (IU)", 0, 230, false, "music_lilac", R.drawable.img_album_exp2, false))
-        songs.add(Song("BBoom BBoom", "모모랜드 (MOMOLAND)", 0, 230, false, "music_lilac", R.drawable.img_album_exp5, false))
-        songs.add(Song("Boy With Love", "방탄소년단 (BTS)", 0, 240, false, "music_lilac", R.drawable.img_album_exp4, false))
+//        songs.add(Song("Lilac", "아이유 (IU)", 0, 230, false, "music_lilac", R.drawable.img_album_exp2, false))
+//        songs.add(Song("BBoom BBoom", "모모랜드 (MOMOLAND)", 0, 230, false, "music_lilac", R.drawable.img_album_exp5, false))
+//        songs.add(Song("Boy With Love", "방탄소년단 (BTS)", 0, 240, false, "music_lilac", R.drawable.img_album_exp4, false))
     }
 
     private fun setLike(isLike: Boolean) {
         val song = songs[nowPos]
         song.isLike = !isLike
 
-        // songDB.songDao().updateisLikeById(!isLike, song.id)
+        songDB.songDao().updateisLikeById(!isLike, song.id)
 
         // Firebase에 저장
-        val likePath = "likes/${song.title}_${song.singer}"
-        fireDB.child(likePath).setValue(song)
+        //val likePath = "likes/${song.title}_${song.singer}"
+        //fireDB.child(likePath).setValue(song)
+
+//        Thread{
+//            val likeDB = SongDatabase.getInstance(this)!!
+//            likeDB.songDao().updateisLikeById(!isLike, song.id)
+//        }.start()
 
         if (!isLike) {
             songBinding.songLike.setImageResource(R.drawable.ic_my_like_on)

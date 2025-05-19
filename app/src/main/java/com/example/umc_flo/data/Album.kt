@@ -10,6 +10,4 @@ data class Album(
     var title: String? = null,
     var singer: String? = null,
     var coverImg: Int? = null
-) : Serializable {
-
-}
+)

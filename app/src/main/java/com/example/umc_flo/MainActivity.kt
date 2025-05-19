@@ -3,12 +3,12 @@ package com.example.umc_flo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.umc_flo.data.Album
-import com.example.umc_flo.data.AlbumDatabase
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.data.SongDatabase
 import com.example.umc_flo.databinding.ActivityMainBinding
@@ -54,8 +54,12 @@ class MainActivity: AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     true
                 }
+                R.id.lookItem -> {
+                    replaceFragment(LookFragment())
+                    true
+                }
                 R.id.storageItem ->{
-                    replaceFragment(SavedSongFragment())
+                    replaceFragment(LockerFragment())
                     true
                 }
                 else -> false
@@ -63,7 +67,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-    fun setMiniPlayer(song: Song){
+    fun setMiniPlayer(song: Song?){
         Log.e("MainActivityppp", "호출됨")
         if (song != null) {
             Log.d("MiniPlayer", "Song: ${song.title}, ${song.singer}, ${song.playtime}")
@@ -72,6 +76,8 @@ class MainActivity: AppCompatActivity() {
             binding.mainSeekbar.progress = (song.second*100)/song.playtime
         } else {
             Log.e("MainActivityppp", "Song object is null!")
+            binding.miniPlayerFrame.visibility = View.GONE
+            return
         }
     }
 
@@ -95,7 +101,7 @@ class MainActivity: AppCompatActivity() {
         }else{
             songDB.songDao().getSong(songId)
         }
-        Log.d("song ID", song.id.toString())
+        //Log.d("song ID", song.id.toString())
         setMiniPlayer(song)
     }
 
@@ -104,48 +110,99 @@ class MainActivity: AppCompatActivity() {
             .replace(R.id.frameMain, fragment)
             .commit()
     }
+
     private fun inputDummySongs(){
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
 
-        if(songs.isNotEmpty()) return
+        if (songs.isNotEmpty()) return
 
         songDB.songDao().insert(
-            Song("Lilac",
+            Song(
+                "Lilac",
                 "아이유 (IU)",
                 0,
-                230,
+                200,
                 false,
                 "music_lilac",
                 R.drawable.img_album_exp2,
-                false)
+                false,
+            )
         )
+
         songDB.songDao().insert(
-            Song("BBoom BBoom",
-                "모모랜드 (MOMOLAND)",
+            Song(
+                "Flu",
+                "아이유 (IU)",
+                0,
+                200,
+                false,
+                "music_flu",
+                R.drawable.img_album_exp2,
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Butter",
+                "방탄소년단 (BTS)",
+                0,
+                190,
+                false,
+                "music_butter",
+                R.drawable.img_album_exp,
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Next Level",
+                "에스파 (AESPA)",
+                0,
+                210,
+                false,
+                "music_next",
+                R.drawable.img_album_exp3,
+                false,
+            )
+        )
+
+
+        songDB.songDao().insert(
+            Song(
+                "Boy with Luv",
+                "music_boy",
                 0,
                 230,
                 false,
                 "music_lilac",
-                R.drawable.img_album_exp5,
-                false)
+                R.drawable.img_album_exp4,
+                false,
+            )
         )
+
+
         songDB.songDao().insert(
-            Song("Boy With Love",
-                "방탄소년단 (BTS)",
+            Song(
+                "BBoom BBoom",
+                "모모랜드 (MOMOLAND)",
                 0,
                 240,
                 false,
-                "music_lilac",
-                R.drawable.img_album_exp4,
-                false)
+                "music_bboom",
+                R.drawable.img_album_exp5,
+                false,
+            )
         )
 
         val _songs = songDB.songDao().getSongs()
         Log.d("DB data", _songs.toString())
     }
+
     private fun inputDummyAlbum(){
-        val albumDB = AlbumDatabase.getInstance(this)!!
+        val albumDB = SongDatabase.getInstance(this)!!
 
         albumDB.albumDao().insertAlbum(
             Album(1, "Butter", "방탄소년 (BTS)", R.drawable.img_album_exp)

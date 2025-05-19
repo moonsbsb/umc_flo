@@ -4,15 +4,16 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.umc_flo.data.Album
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.databinding.ItemLockerBinding
-import com.example.umc_flo.ui.AlbumRVAdapter
-import com.example.umc_flo.ui.LockerRVAdapter
 
 class SavedSongRVAdapter () :
     RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
 
     private val songs = ArrayList<Song>()
+    private val albums = ArrayList<Album>()
+
     interface MyItemClickListener{
         fun onRemoveSong(songId: Int)
     }
@@ -44,6 +45,12 @@ class SavedSongRVAdapter () :
         this.songs.clear()
         this.songs.addAll(songs)
 
+        notifyDataSetChanged()
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun addAlbums(albums: ArrayList<Album>){
+        this.albums.clear()
+        this.albums.addAll(albums)
         notifyDataSetChanged()
     }
     @SuppressLint("NotifyDataSetChanged")

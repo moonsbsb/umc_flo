@@ -1,67 +1,57 @@
 package com.example.umc_flo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_flo.data.Song
 import com.example.umc_flo.data.SongDatabase
 import com.example.umc_flo.databinding.FragmentLockerSavedsongBinding
-import kotlinx.coroutines.launch
 
-class SavedSongFragment: Fragment() {
-    lateinit var binding: FragmentLockerSavedsongBinding
-    lateinit var songDB: SongDatabase
+class SavedSongFragment : Fragment() {
+    private var _binding: FragmentLockerSavedsongBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var songDB: SongDatabase
+    private lateinit var savedSongAdapter: SavedSongRVAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentLockerSavedsongBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentLockerSavedsongBinding.inflate(inflater, container, false)
 
         songDB = SongDatabase.getInstance(requireContext())!!
+        initRecyclerView()
 
-        binding.allSelectTxt.setOnClickListener {
-            Log.d("SavedSongFragment", "눌렀다")
-            val bottomSheet = BottomSheetFragment()
-            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-        }
-        binding.dislikeBtn.setOnClickListener {
-            val likeList = songDB.songDao().getLikedSongs(true)
-            lifecycleScope.launch {
-                for(i in 0 until  likeList.size) {
-                songDB.songDao().updateisLikeById(false, likeList[i].id)
-                }
-                val updateList = songDB.songDao().getLikedSongs(true)
-                (binding.lockerSavedSongRecyclerView.adapter as SavedSongRVAdapter).addSongs(updateList as ArrayList<Song>)
-            }
-        }
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        initRecyclerView()
-    }
-    private fun initRecyclerView(){
-        binding.lockerSavedSongRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    private fun initRecyclerView() {
+        savedSongAdapter = SavedSongRVAdapter()
 
-        val songRVAdapter =  SavedSongRVAdapter()
-
-        songRVAdapter.setMyItemClickListener(object : SavedSongRVAdapter.MyItemClickListener{
+        savedSongAdapter.setMyItemClickListener(object : SavedSongRVAdapter.MyItemClickListener {
             override fun onRemoveSong(songId: Int) {
                 songDB.songDao().updateisLikeById(false, songId)
+                loadLikedSongs()
             }
-
-
         })
 
-        binding.lockerSavedSongRecyclerView.adapter = songRVAdapter
-        songRVAdapter.addSongs(songDB.songDao().getLikedSongs(true) as ArrayList<Song>)
+        binding.lockerSavedSongRecyclerView.adapter = savedSongAdapter
+        binding.lockerSavedSongRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        loadLikedSongs()
+    }
+
+    private fun loadLikedSongs() {
+        val likedSongs = songDB.songDao().getLikedSongs(true)
+        savedSongAdapter.addSongs(likedSongs as ArrayList<Song>)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
