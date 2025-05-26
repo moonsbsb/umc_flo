@@ -10,7 +10,7 @@ import androidx.room.Update
 @Dao
 interface AlbumDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun insertAlbum(album: Album)
 
     @Query("SELECT * FROM AlbumTable")

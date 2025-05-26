@@ -6,9 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.umc_flo.data.SongDatabase
+import com.example.umc_flo.data.User
 import com.example.umc_flo.databinding.ActivityLoginBinding
 
-class LoginActivity: AppCompatActivity() {
+class LoginActivity: AppCompatActivity(), LoginView {
     val binding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
@@ -36,7 +37,7 @@ class LoginActivity: AppCompatActivity() {
         val email : String = binding.emailTxt.text.toString() + "@" + binding.emailBackTxt.text.toString()
         val pwd : String = binding.passwordTxt.text.toString()
 
-        val songDB = SongDatabase.getInstance(this)!!
+        /*val songDB = SongDatabase.getInstance(this)!!
         val user = songDB.userDao().getUser(email, pwd)
 
         if(user == null) {
@@ -46,19 +47,49 @@ class LoginActivity: AppCompatActivity() {
 
         user?.let {
             Log.d("LOGIN_ACT/GET_USER", "userId: ${user.id}, $user")
-            saveJwt(user.id)
+            //saveJwt(user.id)
             startMainActivity()
-        }
+        }*/
+        //
+        //
+        val authService = AuthService()
+        authService.setLoginView(this)
+
+        authService.login(User(email, pwd, ""))
+
     }
     private fun saveJwt(jwt: Int){
         val spf = getSharedPreferences("auth", MODE_PRIVATE)
         val editor = spf.edit()
 
-        editor.putInt("jwt", jwt)
+        editor.putInt("saveJwt_jwt", jwt)
+        editor.apply()
+    }
+    private fun saveJwt2(jwt: String){
+        val spf = getSharedPreferences("auth2", MODE_PRIVATE)
+        val editor = spf.edit()
+
+        editor.putString("saveJwt2_jwt", jwt)
         editor.apply()
     }
     private fun startMainActivity(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onSignUPSuccess(code: String, result: Result) {
+        Log.d("LOGIN_CHECK", "로그인 성공~ JWT: ${result.jwt}")
+        when(code){
+            "200" -> {
+                saveJwt2(result.jwt)
+                startMainActivity()
+            }else -> {
+                onSignUpFailure(code)
+            }
+        }
+    }
+
+    override fun onSignUpFailure(code: String) {
+        Toast.makeText(this, "로그인 실패: $code", Toast.LENGTH_SHORT).show()
     }
 }
