@@ -1,11 +1,10 @@
 package com.example.umc_flo.data
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
+import com.example.umc_flo.data.entities.Album
+import com.example.umc_flo.data.entities.Like
 
 @Dao
 interface AlbumDao {

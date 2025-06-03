@@ -64,7 +64,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.room.common)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
+    //implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,7 +93,7 @@ dependencies {
     //GSon추가
     implementation("com.google.code.gson:gson:2.8.9")
 
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.9.0")
 
 
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
@@ -110,4 +110,12 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
+
+    implementation("com.kakao.sdk:v2-all:2.19.0") // 전체 모듈 설치, 2.11.0 버전부터 지원
+    implementation("com.kakao.sdk:v2-user:2.19.0") // 카카오 로그인 API 모듈
+    implementation("com.kakao.sdk:v2-share:2.19.0") // 카카오톡 공유 API 모듈
+    implementation("com.kakao.sdk:v2-talk:2.19.0") // 카카오톡 채널, 카카오톡 소셜, 카카오톡 메시지 API 모듈
+    implementation("com.kakao.sdk:v2-friend:2.19.0") // 피커 API 모듈
+    implementation("com.kakao.sdk:v2-navi:2.19.0") // 카카오내비 API 모듈
+    implementation("com.kakao.sdk:v2-cert:2.19.0") // 카카오톡 인증 서비스 API 모듈
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:gravity="center_horizontal"
-    tools:context=".BottomSheetFragment">
+    tools:context=".ui.splash.BottomSheetFragment">
 
     <TextView
         android:id="@+id/sheetTxt1"
